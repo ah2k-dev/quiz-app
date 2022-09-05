@@ -1,0 +1,85 @@
+import {
+  ADDCOURSE_FAILURE,
+  ADDCOURSE_REQUEST,
+  ADDCOURSE_SUCCESS,
+  ADDSTUDENT_FAILURE,
+  ADDSTUDENT_REQUEST,
+  ADDSTUDENT_SUCCESS,
+  ADDQUIZ_FAILURE,
+  ADDQUIZ_REQUEST,
+  ADDQUIZ_SUCCESS,
+  ENROLLSTUDENTS_FAILURE,
+  ENROLLSTUDENTS_REQUEST,
+  ENROLLSTUDENTS_SUCCESS,
+  GETTEACHERCOURSES_FAILURE,
+  GETTEACHERCOURSES_REQUEST,
+  GETTEACHERCOURSES_SUCCESS,
+  GETSTUDENTS_FAILURE,
+  GETSTUDENTS_REQUEST,
+  GETSTUDENTS_SUCCESS,
+  GETCOURSEQUIZES_FAILURE,
+  GETCOURSEQUIZES_REQUEST,
+  GETCOURSEQUIZES_SUCCESS,
+  GETQUIZRESULTS_FAILURE,
+  GETQUIZRESULTS_REQUEST,
+  GETQUIZRESULTS_SUCCESS,
+  GETSTUDENTRESULTS_FAILURE,
+  GETSTUDENTRESULTS_REQUEST,
+  GETSTUDENTRESULTS_SUCCESS,
+} from "../constants/teacherConstants";
+import { CLEAR_ERRORS } from "../constants/userConstants";
+
+export const teacherReducer = (state = { response: {} }, action) => {
+  switch (action.type) {
+    case ADDCOURSE_REQUEST:
+    case ADDSTUDENT_REQUEST:
+    case ADDQUIZ_REQUEST:
+    case ENROLLSTUDENTS_REQUEST:
+    case GETTEACHERCOURSES_REQUEST:
+    case GETSTUDENTS_REQUEST:
+    case GETCOURSEQUIZES_REQUEST:
+    case GETQUIZRESULTS_REQUEST:
+    case GETSTUDENTRESULTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case ADDCOURSE_FAILURE:
+    case ADDSTUDENT_FAILURE:
+    case ADDQUIZ_FAILURE:
+    case ENROLLSTUDENTS_FAILURE:
+    case GETTEACHERCOURSES_FAILURE:
+    case GETSTUDENTS_FAILURE:
+    case GETCOURSEQUIZES_FAILURE:
+    case GETQUIZRESULTS_FAILURE:
+    case GETSTUDENTRESULTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case ADDCOURSE_SUCCESS:
+    case ADDSTUDENT_SUCCESS:
+    case ADDQUIZ_SUCCESS:
+    case ENROLLSTUDENTS_SUCCESS:
+    case GETTEACHERCOURSES_SUCCESS:
+    case GETSTUDENTS_SUCCESS:
+    case GETCOURSEQUIZES_SUCCESS:
+    case GETQUIZRESULTS_SUCCESS:
+    case GETSTUDENTRESULTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        response: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
